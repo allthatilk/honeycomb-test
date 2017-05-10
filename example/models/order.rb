@@ -17,7 +17,7 @@ class Order
   end
 
   def total_cost
-    items.inject(0) { |memo, (_, delivery)| memo += delivery.price }
+    items.inject(0) { |memo, (_, delivery)| memo += delivery.price } # ?
   end
 
   def output
