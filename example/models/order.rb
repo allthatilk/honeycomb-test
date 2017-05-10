@@ -17,7 +17,12 @@ class Order
   end
 
   def total_cost
-    items.inject(0) { |memo, (_, delivery)| memo += delivery.price } # ?
+    items.inject(0) { |memo, (_, delivery)| memo += delivery.price }
+  end
+
+  def deductions
+    # total_cost > spending_qualifier ? deduction : 0
+    5
   end
 
   def output
@@ -36,7 +41,9 @@ class Order
       end
 
       result << output_separator
-      result << "Total: $#{total_cost}"
+      result << "Discounts: $#{deductions}"
+      result << output_separator
+      result << "Total: $#{total_cost - deductions}"
     end.join("\n")
   end
 

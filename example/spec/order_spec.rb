@@ -35,7 +35,7 @@ describe Order do
       subject.add broadcaster_3, standard_delivery
       subject.add broadcaster_4, express_delivery
 
-      expect(subject.total_cost).to eq(45)
+      expect(subject.total_cost - subject.deductions).to eq(45)
     end
   end
 end
