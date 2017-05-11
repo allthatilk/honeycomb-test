@@ -1,5 +1,5 @@
 class SpecialOffer
-attr_accessor :total_discount
+  attr_accessor :total_discount
 
   def initialize(order)
     @order = order
