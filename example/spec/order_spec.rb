@@ -19,6 +19,8 @@ describe Order do
   context 'with items' do
     broadcaster_1 = Broadcaster.new(1, 'Viacom')
     broadcaster_2 = Broadcaster.new(2, 'Disney')
+    broadcaster_3 = Broadcaster.new(3, 'Discovery')
+    broadcaster_4 = Broadcaster.new(4, 'Horse and Country')
 
     it 'returns the total cost of all items' do
       subject.add broadcaster_1, standard_delivery
@@ -28,14 +30,11 @@ describe Order do
     end
 
     it 'subtracts the current percent discount from qualifying order' do
-      broadcaster_3 = Broadcaster.new(3, 'Discovery')
-      broadcaster_4 = Broadcaster.new(4, 'Horse and Country')
-
       subject.add broadcaster_1, standard_delivery
       subject.add broadcaster_2, standard_delivery
       subject.add broadcaster_3, standard_delivery
       subject.add broadcaster_4, express_delivery
-      
+
       special_offer = SpecialOffer.new(subject)
       special_offer.calculate_discount(0, 0, 30, 0.9)
 
@@ -43,8 +42,6 @@ describe Order do
     end
 
     it 'subtracts the current set delivery discount from qualifying order' do
-      broadcaster_3 = Broadcaster.new(3, 'Discovery')
-
       subject.add broadcaster_1, express_delivery
       subject.add broadcaster_2, express_delivery
       subject.add broadcaster_3, express_delivery
