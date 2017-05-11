@@ -7,6 +7,14 @@ attr_accessor :total_discount
     @total_discount = 0
   end
 
+  def calculate_discount(qualifier1, cost_deduction, qualifier2, percent_decimal)
+      @cost += express_bulk_discount(qualifier1, cost_deduction)
+      @cost -= percent_discount(qualifier2, percent_decimal)
+      @total_discount += @order.total_cost - @cost
+  end
+
+  private
+
   def express_bulk_discount(qualifier, cost_deduction)
     delivery_type = @order.items.map { |(_, delivery)| delivery.name.to_s }
     express_count = delivery_type.count("express")
@@ -15,11 +23,5 @@ attr_accessor :total_discount
 
   def percent_discount(qualifier, percent_decimal)
     @order.total_cost >= qualifier ? @cost - (@cost * percent_decimal) : 0
-  end
-
-  def calculate_discount(qualifier1, cost_deduction, qualifier2, percent_decimal)
-      @cost += express_bulk_discount(qualifier1, cost_deduction)
-      @cost -= percent_discount(qualifier2, percent_decimal)
-      @total_discount += @order.total_cost - @cost
   end
 end
