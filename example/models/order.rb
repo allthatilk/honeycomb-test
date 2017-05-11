@@ -20,11 +20,6 @@ class Order
     items.inject(0) { |memo, (_, delivery)| memo += delivery.price }
   end
 
-  def deductions
-    # total_cost > spending_qualifier ? deduction : 0
-    5
-  end
-
   def output
     [].tap do |result|
       result << "Order for #{material.identifier}:"
@@ -41,9 +36,9 @@ class Order
       end
 
       result << output_separator
-      result << "Discounts: $#{deductions}"
-      result << output_separator
-      result << "Total: $#{total_cost - deductions}"
+      # result << "Discounts: -$#{@discount}"
+      # result << output_separator
+      result << "Total: $#{total_cost}"
     end.join("\n")
   end
 

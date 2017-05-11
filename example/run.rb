@@ -4,6 +4,7 @@ require './models/broadcaster'
 require './models/delivery'
 require './models/material'
 require './models/order'
+require './models/special_offer'
 
 standard_delivery = Delivery.new(:standard, 10.0)
 express_delivery = Delivery.new(:express, 20.0)
@@ -17,6 +18,7 @@ broadcaster_6 = Broadcaster.new(6, 'Bike Channel')
 broadcaster_7 = Broadcaster.new(7, 'Horse and Country')
 
 material = Material.new('WNP/SWCL001/010')
+# special_offer = SpecialOffer.new(30, 0.9)
 
 order = Order.new(material)
 
