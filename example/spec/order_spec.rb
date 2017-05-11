@@ -17,6 +17,7 @@ describe Order do
   end
 
   context 'with items' do
+    let(:special_offer) {SpecialOffer.new(subject)}
     broadcaster_1 = Broadcaster.new(1, 'Viacom')
     broadcaster_2 = Broadcaster.new(2, 'Disney')
     broadcaster_3 = Broadcaster.new(3, 'Discovery')
@@ -35,7 +36,6 @@ describe Order do
       subject.add broadcaster_3, standard_delivery
       subject.add broadcaster_4, express_delivery
 
-      special_offer = SpecialOffer.new(subject)
       special_offer.calculate_discount(0, 0, 30, 0.9)
 
       expect(subject.total_cost - special_offer.total_discount).to eq(45)
@@ -46,7 +46,6 @@ describe Order do
       subject.add broadcaster_2, express_delivery
       subject.add broadcaster_3, express_delivery
 
-      special_offer = SpecialOffer.new(subject)
       special_offer.calculate_discount(2, 5, 30, 0.9)
 
       expect(subject.total_cost - special_offer.total_discount).to eq(40.5)
