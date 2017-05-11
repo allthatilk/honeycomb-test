@@ -8,9 +8,9 @@ attr_accessor :total_discount
   end
 
   def calculate_discount(qualifier1, cost_deduction, qualifier2, percent_decimal)
-      @cost += express_bulk_discount(qualifier1, cost_deduction)
-      @cost -= percent_discount(qualifier2, percent_decimal)
-      @total_discount += @order.total_cost - @cost
+    @cost += express_bulk_discount(qualifier1, cost_deduction)
+    @cost -= percent_discount(qualifier2, percent_decimal)
+    @total_discount += @order.total_cost - @cost
   end
 
   private
