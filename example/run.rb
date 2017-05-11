@@ -18,13 +18,15 @@ broadcaster_6 = Broadcaster.new(6, 'Bike Channel')
 broadcaster_7 = Broadcaster.new(7, 'Horse and Country')
 
 material = Material.new('WNP/SWCL001/010')
-# special_offer = SpecialOffer.new(30, 0.9)
-
 order = Order.new(material)
 
 order.add broadcaster_1, standard_delivery
 order.add broadcaster_2, standard_delivery
 order.add broadcaster_3, express_delivery
+
+special_offer = SpecialOffer.new(order)
+special_offer.calculate_discount(2, 5, 30, 0.9)
+order.check_offers(special_offer.total_discount)
 
 print order.output
 print "\n"

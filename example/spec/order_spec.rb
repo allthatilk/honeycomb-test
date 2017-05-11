@@ -35,10 +35,24 @@ describe Order do
       subject.add broadcaster_2, standard_delivery
       subject.add broadcaster_3, standard_delivery
       subject.add broadcaster_4, express_delivery
+      
       special_offer = SpecialOffer.new(subject)
-      discount = special_offer.percent_discount(30, 0.9)
+      special_offer.calculate_discount(0, 0, 30, 0.9)
 
-      expect(subject.total_cost - discount).to eq(45)
+      expect(subject.total_cost - special_offer.total_discount).to eq(45)
+    end
+
+    it 'subtracts the current set delivery discount from qualifying order' do
+      broadcaster_3 = Broadcaster.new(3, 'Discovery')
+
+      subject.add broadcaster_1, express_delivery
+      subject.add broadcaster_2, express_delivery
+      subject.add broadcaster_3, express_delivery
+
+      special_offer = SpecialOffer.new(subject)
+      special_offer.calculate_discount(2, 5, 30, 0.9)
+
+      expect(subject.total_cost - special_offer.total_discount).to eq(40.5)
     end
   end
 end

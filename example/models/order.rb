@@ -20,6 +20,10 @@ class Order
     items.inject(0) { |memo, (_, delivery)| memo += delivery.price }
   end
 
+  def check_offers(discount)
+    @discount = discount
+  end
+
   def output
     [].tap do |result|
       result << "Order for #{material.identifier}:"
@@ -36,9 +40,9 @@ class Order
       end
 
       result << output_separator
-      # result << "Discounts: -$#{@discount}"
-      # result << output_separator
-      result << "Total: $#{total_cost}"
+      result << "Discounts: -$#{@discount}"
+      result << output_separator
+      result << "Total: $#{total_cost - @discount}"
     end.join("\n")
   end
 
